@@ -206,3 +206,25 @@ if get(g:, 'cpp_simple_highlight', 0)
     hi! def link cppExceptions   Statement
     hi! def link cppStorageClass Statement
 endif
+
+" Operators
+syn match cOperator	"\(<<\|>>\|[-+*/%&^|<>!=]\)="
+syn match cOperator	"<<\|>>\|&&\|||\|++\|--\|->"
+syn match cOperator	"[.!~*&%<>^|=,+-]"
+syn match cOperator	"/[^/*=]"me=e-1
+syn match cOperator	"/$"
+syn match cOperator "&&\|||"
+syn match cOperator	"[][]"
+
+" Functions
+syn match cUserFunction "\<\h\w*\>\(\s\|\n\)*("me=e-1 contains=cType,cDelimiter,cDefine
+syn match cUserFunctionPointer "(\s*\*\s*\h\w*\s*)\(\s\|\n\)*(" contains=cDelimiter,cOperator
+
+hi def link cUserFunction cFunction
+hi def link cUserFunctionPointer cFunction
+
+" Delimiters
+syn match cDelimiter    "[();\\]"
+" foldmethod=syntax fix, courtesy of Ivan Freitas
+syn match cBraces display "[{}]"
+
